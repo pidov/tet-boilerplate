@@ -86,7 +86,12 @@ module.exports = {
     // https://github.com/facebookincubator/create-react-app/issues/290
     extensions: ['.js', '.json', '.jsx'],
     alias: {
-      
+      '~components': paths.appComponents,
+      '~containers': paths.appContainers,
+      '~pages': paths.appPages,
+      '~reducers': paths.appReducers,
+      '~actions': paths.appActions,
+      '~store': paths.appStore,
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
