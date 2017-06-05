@@ -9,7 +9,7 @@ export default function configureStore (history) {
   let enhancers = []
 
    if (process.env.NODE_ENV === `development`) {
-    const createLogger = require(`redux-logger`)
+    const { createLogger } = require(`redux-logger`)
     const logger = createLogger({ stateTransformer })
     middlewares.push(logger)
   }
@@ -30,4 +30,6 @@ export default function configureStore (history) {
       store.replaceReducer(nextReducer)
     })
   }
+  
+  return store
 }
