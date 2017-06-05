@@ -8,36 +8,59 @@ enquirer.register('radio', require('prompt-radio'));
 
 const argv = process.argv.slice(2);
 const template = argv[0]
-const name = argv[1]
+const fileName = argv[1]
 
-if (!template) {
+const templates = {
+  component: {
+    type: 'component',
+    extension: 'jsx', 
+    targetDirectory: 'components'
+  }, 
+  container: {
+    type: 'container',
+    extension: 'jsx', 
+    targetDirectory: 'containers'
+  },
+  page: {
+    type: 'page',
+    extension: 'jsx', 
+    targetDirectory: 'pages'
+  },
+  action: {
+    type: 'action',
+    extension: 'js', 
+    targetDirectory: 'actions'
+  }
+}
+
+if (!template) { 
   const questions = [{
     name: 'template',
     type: 'radio',
     message: 'Select a template',
     default: 'component',
-    choices: ['component', 'container', 'page']
+    choices: Object.keys(templates)
   }, {
-    name: 'name',
+    name: 'fileName',
     type: 'input',
     message: 'Enter name',
-    default: 'Index'
+    default: 'index'
   }]
 
   enquirer.ask(questions).then(answers => {
-    generator(answers.template, answers.name)
+    generator(answers.template, answers.fileName)
   })
 
 } else {
-  generator(template, name)
+  generator(template, fileName)
 }
 
-function generator(templateName, name) {
+function generator(templateName, filename) {
+  const {targetDirectory, extension} = templates[templateName]
   const templateFilePath = path.resolve(`${__dirname}/templates/${templateName}.mst`)
   const templateSource = fs.readFileSync(templateFilePath, { encoding: 'utf8' })
-  const templateData = { name }
 
-  const template = Mustache.render(templateSource, templateData)
-  const outputFilePath = path.resolve(`${__dirname}/../src/${templateName}s/${templateData.name}.jsx`)
+  const outputFilePath = path.resolve(`${__dirname}/../src/${targetDirectory}/${filename}.${extension}`)
+  const template = Mustache.render(templateSource, { name: filename })
   fs.writeFileSync(outputFilePath, template)
 }

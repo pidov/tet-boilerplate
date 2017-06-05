@@ -1,0 +1,7 @@
+import {createActions} from '~util'
+
+export const actionTypes = {
+  
+}
+
+export default createActions(actionTypes)

@@ -90,6 +90,7 @@ module.exports = {
       '~reducers': paths.appReducers,
       '~actions': paths.appActions,
       '~store': paths.appStore,
+      '~util': paths.appUtil,
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
