@@ -8,4 +8,14 @@ class {{name}} extends Component {
   }
 }
 
+{{name}}.displayName = '{{name}}'
+
+{{name}}.propTypes = {
+  
+}
+
+{{name}}.defaultProps = {
+  
+}
+
 export default {{name}}

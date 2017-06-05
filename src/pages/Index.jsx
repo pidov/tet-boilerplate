@@ -8,4 +8,14 @@ class Index extends Component {
   }
 }
 
+Index.displayName = 'Index'
+
+Index.propTypes = {
+  
+}
+
+Index.defaultProps = {
+  
+}
+
 export default Index
