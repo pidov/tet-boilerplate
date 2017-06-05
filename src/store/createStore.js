@@ -16,11 +16,12 @@ export default function configureStore (history) {
 
   enhancers.push(applyMiddleware(...middlewares))
 
-  if (window.devToolsExtension) {
-    enhancers.push(window.devToolsExtension())
+  if (window.__REDUX_DEVTOOLS_EXTENSION__) {
+    enhancers.push(window.__REDUX_DEVTOOLS_EXTENSION__())
   }
 
-  const storeEnhancers = compose(...enhancers)
+  const storeEnhancers = compose (...enhancers)
+
   const store = createStore(rootReducer, initialState, storeEnhancers)
 
   if (module.hot) {
@@ -30,6 +31,6 @@ export default function configureStore (history) {
       store.replaceReducer(nextReducer)
     })
   }
-  
+
   return store
 }
