@@ -30,6 +30,11 @@ const templates = {
     type: 'action',
     extension: 'js', 
     targetDirectory: 'actions'
+  },
+  reducer: {
+    type: 'reducer',
+    extension: 'js', 
+    targetDirectory: 'reducers'
   }
 }
 
