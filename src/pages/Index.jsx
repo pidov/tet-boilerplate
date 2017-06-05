@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { Link } from 'react-router-dom'
 
 class Index extends Component {
   render() {
     return (
-      <Link to={`/mandate`}>Mandate</Link>  
+      <div>
+        Index
+      </div>
     )
   }
 }
@@ -12,11 +16,18 @@ class Index extends Component {
 Index.displayName = 'Index'
 
 Index.propTypes = {
-  
+
 }
 
 Index.defaultProps = {
-  
+
 }
 
-export default Index
+export default connect(
+  state => ({
+    ...state
+  }),
+  dispatch => ({
+    //...bindActionCreators(actions, dispatch),
+  })
+)(Index)
