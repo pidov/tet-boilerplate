@@ -1,4 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
+// import actions from '~actions/{{name}}'
 
 class {{name}} extends Component {
   render() {
@@ -18,4 +22,11 @@ class {{name}} extends Component {
   
 }
 
-export default {{name}}
+export default connect(
+  state => ({
+    // ...state.{{name}}
+  }),
+  dispatch => ({
+    //...bindActionCreators(actions, dispatch)
+  })
+)({{name}})
