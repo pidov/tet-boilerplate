@@ -68,4 +68,40 @@ function generator(templateName, filename) {
   const outputFilePath = path.resolve(`${__dirname}/../src/${targetDirectory}/${filename}.${extension}`)
   const template = Mustache.render(templateSource, { name: filename })
   fs.writeFileSync(outputFilePath, template)
+
+  if (templateName === 'reducer') {
+    generateRootReducer();
+  }
+}
+
+function generateRootReducer() {
+  const reducersDir = path.resolve(`${__dirname}/../src/reducers`)
+  fs.readdir(reducersDir, (err, files) => {
+    if (err) {
+      throw err
+    }
+
+    let reducers = files.filter(name => {
+      return name !== '.gitkeep' && name !== 'index.js'
+    })
+
+    if (reducers && reducers.length > 0) {
+      reducers = reducers.map(name => {
+        const cleanName = removeFileExtension(name);
+        return {
+          name: cleanName,
+          path: `~reducers/${cleanName}`
+        }
+      })
+    }
+    const templateSource = fs.readFileSync(path.resolve(`${__dirname}/templates/rootReducer.mst`), { encoding: 'utf8' })
+    const outputFilePath = path.resolve(`${__dirname}/../src/reducers/index.js`)
+    
+    const template = Mustache.render(templateSource, { reducers })
+    fs.writeFileSync(outputFilePath, template)
+  })
+}
+
+function removeFileExtension(file) {
+  return file.replace(/\.[^/.]+$/, "")
 }
